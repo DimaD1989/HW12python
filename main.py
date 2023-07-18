@@ -10,12 +10,16 @@ from pathlib import Path
 class Validate:
 
     def __set_name__(self, owner, name):
+        """ __set_name__(self, owner, name) - Для присваивания атрибуту главного класса того же имени, что и у обьекта в котором хранится экземпляр Дескриптора.
+        name - обладает именем атрибута в котором хранится дескриптор."""
         self.param_name = '_' + name
 
     def __get__(self, instance, owner):
+        """ __get__(self, instance, owner) - Возвращает значение атрибута из главного класса."""
         return getattr(instance, self.param_name)
 
     def __set__(self, instance, value):
+        """ __set__(self, instance, value) - Вносит значение в атрибут главного класса."""
         self.validate(value)
         setattr(instance, self.param_name, value)
 
